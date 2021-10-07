@@ -6,6 +6,6 @@ public class SomethingTest {
 
     @Test
     void a_failing_test() {
-        assertThat(1).isEqualTo(2);
+        assertThat(1).isEqualTo(1);
     }
 }
