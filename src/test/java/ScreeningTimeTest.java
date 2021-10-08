@@ -1,7 +1,6 @@
 import com.cinemarcos.domain.valueobject.ScreeningTime;
 import org.junit.jupiter.api.Test;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
@@ -25,7 +24,7 @@ public class ScreeningTimeTest {
         LocalDateTime screeningTime = LocalDateTime.now();
         List<Integer> seats = Arrays.asList(42, 45, 89);
 
-        ReserveSeatsFroScreeningCommand command = new ReserveSeatsFroScreeningCommand(seats, screeningTime);
+        ReserveSeatsForScreeningCommand command = new ReserveSeatsForScreeningCommand(seats, screeningTime);
 
         Screenings screenings = new Screenings() {
             @Override public Screening byTime(LocalDateTime time) {

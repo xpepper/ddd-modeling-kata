@@ -5,7 +5,7 @@ public class SeatsReservationCommandHandler {
         this.screenings = screenings;
     }
 
-    public Boolean handle(ReserveSeatsFroScreeningCommand command) {
+    public Boolean handle(ReserveSeatsForScreeningCommand command) {
         Screening screening = screenings.byTime(command.time);
         Boolean areAvailable = screening.reserveSeats(command.seats);
         return areAvailable;
