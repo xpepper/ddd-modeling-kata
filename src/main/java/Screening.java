@@ -14,14 +14,22 @@ public class Screening {
         this.seats = asList(seats);
     }
 
-    Boolean reserveSeats(List<Integer> seatsToReserve) {
-        List<Seat> toReserve = seatsToReserve.stream().map(Seat::available).collect(toList());
-        if (!seats.containsAll(toReserve)) return false;
+    Boolean reserveSeats(List<Integer> seatNumbers) {
+        List<Seat> seatsReserve = seatsToReserveFrom(seatNumbers);
+        if (!seats.containsAll(seatsReserve)) return false;
 
+        doReserve(seatsReserve);
+        return true;
+    }
+
+    private List<Seat> seatsToReserveFrom(List<Integer> seatsToReserve) {
+        return seatsToReserve.stream().map(Seat::available).collect(toList());
+    }
+
+    private void doReserve(List<Seat> seatsToReserve) {
         seats.replaceAll(seat -> {
-            if (toReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
+            if (seatsToReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
             return seat;
         });
-        return true;
     }
 }
