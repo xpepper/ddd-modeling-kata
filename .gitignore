@@ -6,3 +6,4 @@ gradlew.bat
 *.iws
 out/
 .idea_modules/
+.DS_Store
