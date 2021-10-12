@@ -12,10 +12,10 @@ public class ReserveSeatsCommandHandlerTest {
     void customer_can_reserves_seats_when_all_available() {
         LocalDateTime screeningTime = LocalDateTime.now();
         List<Integer> seats = Arrays.asList(42, 45, 89);
-        ScreeningRepository screenings = scheduleTime -> new Screening();
+        ScreeningRepository screeningRepository = scheduleTime -> new Screening();
         ReserveSeatsCommand command = new ReserveSeatsCommand(seats, screeningTime);
 
-        Boolean reserved = new ReserveSeatsCommandHandler(screenings).handle(command);
+        Boolean reserved = new ReserveSeatsCommandHandler(screeningRepository).handle(command);
 
         assertThat(reserved).isTrue();
     }
