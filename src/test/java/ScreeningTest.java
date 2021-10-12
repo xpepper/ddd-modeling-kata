@@ -8,7 +8,7 @@ public class ScreeningTest {
 
     @Test
     void reserve_seats_when_available() {
-        Screening screening = new Screening(asList(Seat.available(1), Seat.reserved(2)));
+        Screening screening = new Screening(Seat.available(1), Seat.reserved(2));
         Boolean reserved = screening.reserveSeats(asList(1));
 
         assertThat(reserved).isTrue();
@@ -16,7 +16,7 @@ public class ScreeningTest {
 
     @Test
     void does_not_reserve_seat_when_unavailable() {
-        Screening screening = new Screening(asList(Seat.available(1), Seat.reserved(2)));
+        Screening screening = new Screening(Seat.available(1), Seat.reserved(2));
         Boolean reserved = screening.reserveSeats(asList(2));
 
         assertThat(reserved).isFalse();
@@ -24,7 +24,7 @@ public class ScreeningTest {
 
     @Test
     void cannot_reserve_twice_the_same_seats() {
-        Screening screening = new Screening(asList(Seat.available(1), Seat.reserved(2)));
+        Screening screening = new Screening(Seat.available(1), Seat.reserved(2));
         assertTrue(screening.reserveSeats(asList(1)));
 
         Boolean reserved = screening.reserveSeats(asList(1));

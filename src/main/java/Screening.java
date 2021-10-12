@@ -1,5 +1,6 @@
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class Screening {
@@ -7,6 +8,10 @@ public class Screening {
 
     public Screening(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public Screening(Seat... seats) {
+        this.seats = asList(seats);
     }
 
     Boolean reserveSeats(List<Integer> seatsToReserve) {
