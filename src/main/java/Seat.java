@@ -4,15 +4,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Seat {
     final int seatNumber;
-    private boolean isReserved;
+    private boolean isAvailable;
 
-    public Seat(int seatNumber, boolean isReserved) {
+    public Seat(int seatNumber, boolean isAvailable) {
         this.seatNumber = seatNumber;
-        this.isReserved = isReserved;
+        this.isAvailable = isAvailable;
     }
 
     public void reserve() {
-        isReserved = true;
+        isAvailable = true;
     }
 
     @Override
@@ -23,19 +23,19 @@ public class Seat {
 
         Seat seat = (Seat) o;
 
-        return new EqualsBuilder().append(seatNumber, seat.seatNumber).append(isReserved, seat.isReserved).isEquals();
+        return new EqualsBuilder().append(seatNumber, seat.seatNumber).append(isAvailable, seat.isAvailable).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(seatNumber).append(isReserved).toHashCode();
+        return new HashCodeBuilder(17, 37).append(seatNumber).append(isAvailable).toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
             .append("seatNumber", seatNumber)
-            .append("isReserved", isReserved)
+            .append("isReserved", isAvailable)
             .toString();
     }
 }
