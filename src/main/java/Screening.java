@@ -10,7 +10,7 @@ public class Screening {
 
     Boolean reserveSeats(List<Integer> seatsToReserve) {
         for (Integer seatToReserve : seatsToReserve) {
-            if (!seats.contains(new Seat(seatToReserve, true))) {
+            if (!seats.contains(Seat.available(seatToReserve))) {
                 return false;
             }
         }

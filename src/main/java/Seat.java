@@ -6,9 +6,17 @@ public class Seat {
     final int seatNumber;
     private boolean isAvailable;
 
-    public Seat(int seatNumber, boolean isAvailable) {
+    private Seat(int seatNumber, boolean isAvailable) {
         this.seatNumber = seatNumber;
         this.isAvailable = isAvailable;
+    }
+
+    static Seat available(int seatNumber) {
+        return new Seat(seatNumber, true);
+    }
+
+    static Seat reserved(int seatNumber) {
+        return new Seat(seatNumber, false);
     }
 
     public void reserve() {
