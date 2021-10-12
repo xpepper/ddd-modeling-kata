@@ -1,5 +1,6 @@
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Screening {
     private final List<Seat> seats;
@@ -10,16 +11,13 @@ public class Screening {
 
     Boolean reserveSeats(List<Integer> seatsToReserve) {
         for (Integer seatToReserve : seatsToReserve) {
-            if (!seats.contains(Seat.available(seatToReserve))) {
-                return false;
-            }
+            if (!seats.contains(Seat.available(seatToReserve))) return false;
         }
-        seatsToReserve.stream().forEach(seat ->
-            seats.stream().filter(screeningSeat ->
-                    screeningSeat.seatNumber == seat)
-                .collect(Collectors.toList()).get(0)
-                .reserve()
-        );
+        List<Seat> toReserve = seatsToReserve.stream().map(Seat::available).collect(toList());
+        seats.replaceAll(seat -> {
+            if (toReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
+            return seat;
+        });
         return true;
     }
 }

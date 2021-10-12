@@ -1,5 +1,7 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -24,7 +26,6 @@ public class ScreeningTest {
     }
 
     @Test
-    @Disabled
     void cannot_reserve_twice_the_same_seats() {
         Screening screening = new Screening(asList(Seat.available(1), Seat.reserved(2)));
         assertTrue(screening.reserveSeats(asList(1)));
