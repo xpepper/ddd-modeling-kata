@@ -10,10 +10,9 @@ public class Screening {
     }
 
     Boolean reserveSeats(List<Integer> seatsToReserve) {
-        for (Integer seatToReserve : seatsToReserve) {
-            if (!seats.contains(Seat.available(seatToReserve))) return false;
-        }
         List<Seat> toReserve = seatsToReserve.stream().map(Seat::available).collect(toList());
+        if (!seats.containsAll(toReserve)) return false;
+
         seats.replaceAll(seat -> {
             if (toReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
             return seat;
