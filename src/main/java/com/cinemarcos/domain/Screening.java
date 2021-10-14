@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class Screening {
-    private final Long id;
+    private Long id;
     private List<Seat> seats;
 
     public Screening() {
@@ -32,6 +32,7 @@ public class Screening {
     }
 
     private void apply(ScreeningCreated event) {
+        id = event.id;
         seats = event.seats.stream().map(Seat::available).collect(toList());
     }
 
