@@ -9,3 +9,4 @@
 
 # Questions
 * who fires the `ScreeningCreated` event?
+* it's better to have `new Screening(events)` or `Screening.from(events)` to reconstitute a `Screening` from events?
