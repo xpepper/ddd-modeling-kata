@@ -6,7 +6,10 @@ import static java.util.Arrays.asList;
 
 public class Demo {
     public static void main(String[] args) {
-        ReserveSeatsCommandHandler commandHandler = new ReserveSeatsCommandHandler(new InMemoryScreeningRepository());
+        InMemoryEventStore eventStore = new InMemoryEventStore();
+        eventStore.append(new ScreeningCreated(123L, asList(1, 3, 42, 45, 89)));
+
+        ReserveSeatsCommandHandler commandHandler = new ReserveSeatsCommandHandler(eventStore);
 
         Boolean reserved = commandHandler.handle(new ReserveSeatsCommand(123L, asList(1)));
         System.out.println("reserved 1 = " + reserved);
