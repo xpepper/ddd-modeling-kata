@@ -6,10 +6,6 @@ import static java.util.stream.Collectors.toList;
 public class Screening {
     private final List<Seat> seats;
 
-    public Screening(List<Seat> seats) {
-        this.seats = seats;
-    }
-
     public Screening(Seat... seats) {
         this.seats = asList(seats);
     }
