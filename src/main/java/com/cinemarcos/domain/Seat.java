@@ -44,8 +44,8 @@ public class Seat {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .append("seatNumber", seatNumber)
-            .append("isReserved", isAvailable)
-            .toString();
+                .append("seatNumber", seatNumber)
+                .append("isReserved", isAvailable)
+                .toString();
     }
 }

@@ -1,9 +1,5 @@
 package com.cinemarcos.domain;
 
-import com.cinemarcos.domain.Screening;
-import com.cinemarcos.domain.ScreeningCreated;
-import com.cinemarcos.domain.ScreeningSeatsReserved;
-import com.cinemarcos.domain.Seat;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
@@ -49,7 +45,7 @@ public class ScreeningTest {
     @Test
     void does_not_reserve_seat_when_unavailable_event_sourced() {
         Screening screening = Screening.from(asList(
-                new ScreeningCreated(asList(1,2,3)),
+                new ScreeningCreated(asList(1, 2, 3)),
                 new ScreeningSeatsReserved(asList(1))
         ));
 

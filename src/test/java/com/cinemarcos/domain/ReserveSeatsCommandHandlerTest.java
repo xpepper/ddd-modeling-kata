@@ -1,6 +1,5 @@
 package com.cinemarcos.domain;
 
-import com.cinemarcos.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -43,11 +42,11 @@ public class ReserveSeatsCommandHandlerTest {
         @Override
         public Screening byTime(LocalDateTime scheduleTime) {
             return new Screening(
-                Seat.available(1),
-                Seat.available(3),
-                Seat.available(42),
-                Seat.available(45),
-                Seat.available(89)
+                    Seat.available(1),
+                    Seat.available(3),
+                    Seat.available(42),
+                    Seat.available(45),
+                    Seat.available(89)
             );
         }
 
