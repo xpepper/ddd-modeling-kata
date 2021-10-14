@@ -36,18 +36,19 @@ public class ReserveSeatsCommandHandlerTest {
     }
 
     static class SpyScreeningRepository implements ScreeningRepository {
+        public static final Screening SCREENING = new Screening(
+                A_SCREENING_ID,
+                Seat.available(1),
+                Seat.available(3),
+                Seat.available(42),
+                Seat.available(45),
+                Seat.available(89)
+        );
         private boolean hasBeenSaved = false;
 
         @Override
         public Screening byId(Long id) {
-            return new Screening(
-                    A_SCREENING_ID,
-                    Seat.available(1),
-                    Seat.available(3),
-                    Seat.available(42),
-                    Seat.available(45),
-                    Seat.available(89)
-            );
+            return SCREENING;
         }
 
         @Override
