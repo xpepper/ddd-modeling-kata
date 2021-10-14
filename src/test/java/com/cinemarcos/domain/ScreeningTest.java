@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScreeningTest {
 
-    public static final long AN_ID = 123L;
+    private static final long AN_ID = 123L;
 
     @Test
     void reserve_seats_when_available() {

@@ -9,11 +9,13 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class ReserveSeatsCommandHandlerTest {
 
+    private static final long A_SCREENING_ID = 123L;
+
     @Test
     void customer_can_reserve_seats_when_all_available() {
         List<Integer> seats = asList(42, 45, 89);
         SpyScreeningRepository screeningRepository = new SpyScreeningRepository();
-        ReserveSeatsCommand command = new ReserveSeatsCommand(123L, seats);
+        ReserveSeatsCommand command = new ReserveSeatsCommand(A_SCREENING_ID, seats);
 
         Boolean reserved = new ReserveSeatsCommandHandler(screeningRepository).handle(command);
 
@@ -25,7 +27,7 @@ public class ReserveSeatsCommandHandlerTest {
     void customer_cannot_reserve_seats_when_not_available() {
         List<Integer> seats = asList(7, 5);
         SpyScreeningRepository screeningRepository = new SpyScreeningRepository();
-        ReserveSeatsCommand command = new ReserveSeatsCommand(123L, seats);
+        ReserveSeatsCommand command = new ReserveSeatsCommand(A_SCREENING_ID, seats);
 
         Boolean reserved = new ReserveSeatsCommandHandler(screeningRepository).handle(command);
 
@@ -39,7 +41,7 @@ public class ReserveSeatsCommandHandlerTest {
         @Override
         public Screening byId(Long id) {
             return new Screening(
-                    123L,
+                    A_SCREENING_ID,
                     Seat.available(1),
                     Seat.available(3),
                     Seat.available(42),
