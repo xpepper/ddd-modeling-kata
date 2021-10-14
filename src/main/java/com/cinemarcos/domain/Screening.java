@@ -1,11 +1,14 @@
 package com.cinemarcos.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.List;
 import java.util.Random;
 
 import static java.lang.System.currentTimeMillis;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE;
 
 public class Screening {
     private Long id;
@@ -63,5 +66,9 @@ public class Screening {
             if (seatsToReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
             return seat;
         });
+    }
+
+    @Override public String toString() {
+        return ToStringBuilder.reflectionToString(this, NO_CLASS_NAME_STYLE);
     }
 }
