@@ -1,22 +1,23 @@
 package com.cinemarcos.domain;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
+import static java.lang.System.currentTimeMillis;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class Screening {
+    private final Long id;
     private List<Seat> seats;
-    private UUID id;
 
-    public Screening(Seat... seats) {
-        this(UUID.randomUUID(), seats);
+    public Screening() {
+        this(new Random(currentTimeMillis()).nextLong());
     }
 
-    public Screening(UUID id, Seat... seats) {
-        this.seats = asList(seats);
+    public Screening(Long id, Seat... seats) {
         this.id = id;
+        this.seats = asList(seats);
     }
 
     public static Screening from(List<Event> events) {

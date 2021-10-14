@@ -2,7 +2,6 @@ package com.cinemarcos.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -12,10 +11,9 @@ public class ReserveSeatsCommandHandlerTest {
 
     @Test
     void customer_can_reserve_seats_when_all_available() {
-        LocalDateTime screeningTime = LocalDateTime.now();
         List<Integer> seats = asList(42, 45, 89);
         SpyScreeningRepository screeningRepository = new SpyScreeningRepository();
-        ReserveSeatsCommand command = new ReserveSeatsCommand(seats, screeningTime);
+        ReserveSeatsCommand command = new ReserveSeatsCommand(123L, seats);
 
         Boolean reserved = new ReserveSeatsCommandHandler(screeningRepository).handle(command);
 
@@ -25,10 +23,9 @@ public class ReserveSeatsCommandHandlerTest {
 
     @Test
     void customer_cannot_reserve_seats_when_not_available() {
-        LocalDateTime screeningTime = LocalDateTime.now();
         List<Integer> seats = asList(7, 5);
         SpyScreeningRepository screeningRepository = new SpyScreeningRepository();
-        ReserveSeatsCommand command = new ReserveSeatsCommand(seats, screeningTime);
+        ReserveSeatsCommand command = new ReserveSeatsCommand(123L, seats);
 
         Boolean reserved = new ReserveSeatsCommandHandler(screeningRepository).handle(command);
 
@@ -40,8 +37,9 @@ public class ReserveSeatsCommandHandlerTest {
         private boolean hasBeenSaved = false;
 
         @Override
-        public Screening byTime(LocalDateTime scheduleTime) {
+        public Screening byId(Long id) {
             return new Screening(
+                    123L,
                     Seat.available(1),
                     Seat.available(3),
                     Seat.available(42),

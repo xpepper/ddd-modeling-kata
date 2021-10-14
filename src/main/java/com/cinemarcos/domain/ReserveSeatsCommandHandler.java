@@ -8,7 +8,7 @@ public class ReserveSeatsCommandHandler {
     }
 
     public Boolean handle(ReserveSeatsCommand command) {
-        Screening screening = screenings.byTime(command.time);
+        Screening screening = screenings.byId(command.screeningId);
         Boolean seatsReserved = screening.reserveSeats(command.seats);
         if (seatsReserved)
             screenings.save(screening);
