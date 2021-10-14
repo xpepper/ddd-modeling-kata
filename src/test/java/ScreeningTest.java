@@ -39,4 +39,14 @@ public class ScreeningTest {
 
         assertThat(reserved).isFalse();
     }
+
+    @Test
+    void does_not_reserve_seat_when_unavailable_event_sourced() {
+        Screening screening = Screening.from(asList(
+                new ScreeningCreated(asList(1,2,3)),
+                new ScreeningSeatsReserved(asList(1))
+        ));
+
+        assertThat(screening.reserveSeats(asList(1))).isFalse();
+    }
 }
