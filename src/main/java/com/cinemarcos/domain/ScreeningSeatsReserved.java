@@ -1,3 +1,5 @@
+package com.cinemarcos.domain;
+
 import java.util.List;
 
 public class ScreeningSeatsReserved extends Event {

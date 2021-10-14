@@ -1,3 +1,6 @@
+package com.cinemarcos.domain;
+
+import com.cinemarcos.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

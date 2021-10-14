@@ -1,4 +1,4 @@
-package com.cinemarcos.domain.valueobject;
+package com.cinemarcos.domain;
 
 import java.time.LocalDateTime;
 

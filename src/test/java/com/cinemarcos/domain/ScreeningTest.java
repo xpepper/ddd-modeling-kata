@@ -1,3 +1,9 @@
+package com.cinemarcos.domain;
+
+import com.cinemarcos.domain.Screening;
+import com.cinemarcos.domain.ScreeningCreated;
+import com.cinemarcos.domain.ScreeningSeatsReserved;
+import com.cinemarcos.domain.Seat;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;

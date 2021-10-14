@@ -1,3 +1,5 @@
+package com.cinemarcos.domain;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -1,4 +1,5 @@
-import com.cinemarcos.domain.valueobject.ScreeningTime;
+package com.cinemarcos.domain;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

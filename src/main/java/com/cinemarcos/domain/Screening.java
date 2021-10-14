@@ -1,3 +1,5 @@
+package com.cinemarcos.domain;
+
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -12,7 +14,7 @@ public class Screening {
 
     public static Screening from(List<Event> events) {
         Screening screening = new Screening();
-        events.forEach(event -> screening.apply(event));
+        events.forEach(screening::apply);
         return screening;
     }
 
@@ -35,7 +37,7 @@ public class Screening {
         });
     }
 
-    Boolean reserveSeats(List<Integer> seatNumbers) {
+    public Boolean reserveSeats(List<Integer> seatNumbers) {
         List<Seat> seatsReserve = seatsToReserveFrom(seatNumbers);
         if (!seats.containsAll(seatsReserve)) return false;
 
