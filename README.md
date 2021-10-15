@@ -32,10 +32,10 @@ If available, the seats should be reserved.
 The user will be informed, if not all seats from the reservation are available.
 
 ### Story #3
-Remove all primitive datatypes from the domain. Use only Value Objects and Entities within the domain
+Remove all primitive data types from the domain. Use only Value Objects and Entities within the domain
 
 ### Story #4
-Bonuspoints: Make illegal states unrepresentible
+Bonus points: Make illegal states unrepresentable
 
 ## Switch to Event Sourcing... 🎭
 
@@ -49,3 +49,5 @@ When a second customer tries to reserve already reserved seats, the system treat
 ### Story #7
 Reservation is only possible up to 15 minutes before the screening.
 
+## Event Sourcing and CQRS
+The customer wants to see the available seats of the screening, chooses from the list which ones to reserve and gets informed about success or failure of the reservation. The reservation is only possible up to 15 minutes before the screening.
