@@ -22,6 +22,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = sourceCompatibility
 
 dependencies {
+
     implementation "org.apache.commons:commons-lang3:3.12.0"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
@@ -29,4 +30,5 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.20.2"
     testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }

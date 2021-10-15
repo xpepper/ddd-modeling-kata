@@ -1,4 +1,4 @@
 package com.cinemarcos.domain;
 
-public class Event {
+public interface Command {
 }

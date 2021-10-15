@@ -1,74 +1,30 @@
 package com.cinemarcos.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import java.util.List;
-import java.util.Random;
-
-import static java.lang.System.currentTimeMillis;
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class Screening {
-    private Long id;
-    private List<Seat> seats;
 
-    public Screening() {
-        this(new Random(currentTimeMillis()).nextLong());
+    ScreeningState state;
+
+    Consumer<Event> publisher;
+
+    public Screening(ScreeningState state, Consumer<Event> publisher) {
+        this.state = state;
+        this.publisher = publisher;
     }
 
-    public Screening(Long id, Seat... seats) {
-        this.id = id;
-        this.seats = asList(seats);
+    public String id() {
+        return state.id();
     }
 
-    public static Screening from(List<Event> events) {
-        Screening screening = new Screening();
-        events.forEach(screening::apply);
-        return screening;
-    }
-
-    private void apply(Event event) {
-        if (event instanceof ScreeningCreated) apply((ScreeningCreated) event);
-        if (event instanceof ScreeningSeatsReserved) apply((ScreeningSeatsReserved) event);
-    }
-
-    private void apply(ScreeningCreated event) {
-        id = event.id;
-        seats = event.seats.stream().map(Seat::available).collect(toList());
-    }
-
-    private void apply(ScreeningSeatsReserved event) {
-        List<Seat> seatsReserve = seatsToReserveFrom(event.seatNumbers);
-        if (!seats.containsAll(seatsReserve)) return;
-
-        seats.replaceAll(seat -> {
-            if (seatsReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
-            return seat;
-        });
-    }
-
-    public Boolean reserveSeats(List<Integer> seatNumbers) {
-        List<Seat> seatsReserve = seatsToReserveFrom(seatNumbers);
-        if (!seats.containsAll(seatsReserve)) return false;
-
-        doReserve(seatsReserve);
-        return true;
-    }
-
-    private List<Seat> seatsToReserveFrom(List<Integer> seatsToReserve) {
-        return seatsToReserve.stream().map(Seat::available).collect(toList());
-    }
-
-    private void doReserve(List<Seat> seatsToReserve) {
-        seats.replaceAll(seat -> {
-            if (seatsToReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
-            return seat;
-        });
-    }
-
-    @Override public String toString() {
-        return ToStringBuilder.reflectionToString(this, NO_CLASS_NAME_STYLE);
+    public void reserveSeats(String customerId, Set<Integer> seats) {
+        if (state.availableSeats.containsAll(seats)) {
+            publisher.accept(new TicketsForScreeningReserved(customerId, state.id(), seats));
+        } else {
+            publisher.accept(new TicketsForScreeningReservationFailed(customerId, state.id(), seats));
+        }
     }
 }
