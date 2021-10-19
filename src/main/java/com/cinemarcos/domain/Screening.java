@@ -29,6 +29,22 @@ public class Screening {
         return screening;
     }
 
+    static Screening from(Event... events) {
+        return from(asList(events));
+    }
+
+    public Boolean reserveSeats(List<Integer> seatNumbers) {
+        List<Seat> seatsReserve = seatsToReserveFrom(seatNumbers);
+        if (!seats.containsAll(seatsReserve)) return false;
+
+        doReserve(seatsReserve);
+        return true;
+    }
+
+    @Override public String toString() {
+        return ToStringBuilder.reflectionToString(this, NO_CLASS_NAME_STYLE);
+    }
+
     private void apply(Event event) {
         if (event instanceof ScreeningCreated) apply((ScreeningCreated) event);
         if (event instanceof ScreeningSeatsReserved) apply((ScreeningSeatsReserved) event);
@@ -49,14 +65,6 @@ public class Screening {
         });
     }
 
-    public Boolean reserveSeats(List<Integer> seatNumbers) {
-        List<Seat> seatsReserve = seatsToReserveFrom(seatNumbers);
-        if (!seats.containsAll(seatsReserve)) return false;
-
-        doReserve(seatsReserve);
-        return true;
-    }
-
     private List<Seat> seatsToReserveFrom(List<Integer> seatsToReserve) {
         return seatsToReserve.stream().map(Seat::available).collect(toList());
     }
@@ -66,9 +74,5 @@ public class Screening {
             if (seatsToReserve.contains(seat)) return Seat.reserved(seat.seatNumber);
             return seat;
         });
-    }
-
-    @Override public String toString() {
-        return ToStringBuilder.reflectionToString(this, NO_CLASS_NAME_STYLE);
     }
 }
