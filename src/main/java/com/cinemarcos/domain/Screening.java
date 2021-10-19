@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE
 public class Screening {
     private Long id;
     private List<Seat> seats;
-    private Consumer<Event> eventPublisher;
+    private final Consumer<Event> eventPublisher;
 
     private Screening(Consumer<Event> eventPublisher) {
         this.eventPublisher = eventPublisher;
