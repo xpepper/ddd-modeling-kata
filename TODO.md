@@ -1,4 +1,5 @@
 # TODO
+* use the java 17 switch case instead of using instanceOf 
 
 ### Nice to have
 * add a scheduleTime to Screening (we forgot to add it before...)
