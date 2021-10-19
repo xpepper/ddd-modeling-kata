@@ -32,16 +32,18 @@ If available, the seats should be reserved.
 The user will be informed, if not all seats from the reservation are available.
 
 ### Story #3
-Remove all primitive data types from the domain. Use only Value Objects and Entities within the domain
+Remove all primitive datatypes from the domain. Use only Value Objects and Entities within the domain
 
 ### Story #4
-Bonus points: Make illegal states unrepresentable
+Bonuspoints: Make illegal states unrepresentible
 
 ## Switch to Event Sourcing... 🎭
 
 ### Story #5
 Refactor the previous test so that the commandhandlers use EventSourcing as a persistance mechanism.
 Publish the Events and test purely with Events and Commands, no dependency on domain state in your tests is allowed.
+
+![](https://i.imgur.com/ef8qTlf.png)
 
 ### Story #6
 When a second customer tries to reserve already reserved seats, the system treats them as unavailable.
@@ -50,4 +52,24 @@ When a second customer tries to reserve already reserved seats, the system treat
 Reservation is only possible up to 15 minutes before the screening.
 
 ## Event Sourcing and CQRS
-The customer wants to see the available seats of the screening, chooses from the list which ones to reserve and gets informed about success or failure of the reservation. The reservation is only possible up to 15 minutes before the screening.
+The customer wants to see the available seats of the screening, chooses from the list which ones to reserve and gets informed about success or failure of the reservation.
+The reservation is only possible up to 15 minutes before the screening.
+
+### Story #8
+Write two tests to ensure each business rule from the scenario by only using commands and events in your test.
+
+### Story #9
+Build a read model that supports the user with the required information.
+Write a test to ensure that, given the past events, when a query is issued, the expected response is delivered.
+
+![](https://i.imgur.com/GZR4JS8.png)
+
+### Story #10
+Write an integration test that uses only commands and queries, no events to check the whole business behaviour of the system.
+
+### Story #11
+If no booking happens within 12 minutes, the reservation is canceled.
+
+### Story #12
+Implement a way to send a notification to customers.
+
