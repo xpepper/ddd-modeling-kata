@@ -18,8 +18,8 @@ test {
     useJUnitPlatform()
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = sourceCompatibility
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 dependencies {
     implementation "org.apache.commons:commons-lang3:3.12.0"

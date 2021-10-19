@@ -1,5 +1,4 @@
 # TODO
-* upgrade Java version
 * create the Screening ID when applying the `ScreeningCreated` event
   * [Question] l'ID dell'aggregato nasce lato client o è server-side? ovvero: nella creazione degli aggregati passate anche l'ID dell'aggregato nel comando o lasciate che venga generato nel costruttore?
 * should we fire a `ReservationDenied` event?
