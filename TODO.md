@@ -9,6 +9,7 @@
 * who fires the `ScreeningCreated` event?
 * should we fire a `ReservationDenied` event?
 * it's better to have `new Screening(events)` or `Screening.from(events)` to reconstitute a `Screening` from events?
+* trade-offs between using an interface (`Publisher#publish(event)`) vs passing a function (`(event) -> EventStore::append`)
 
 # Ideas
 * mechanics of an event sourced architecture
