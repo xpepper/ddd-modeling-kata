@@ -18,14 +18,14 @@ public class Screening {
         this.eventPublisher = eventPublisher;
     }
 
-    public static Screening from(Consumer<Event> eventPublisher, List<Event> events) {
+    public static Screening from(List<Event> events, Consumer<Event> eventPublisher) {
         Screening screening = new Screening(eventPublisher);
         events.forEach(screening::apply);
         return screening;
     }
 
     static Screening from(Consumer<Event> eventPublisher, Event... events) {
-        return from(eventPublisher, asList(events));
+        return from(asList(events), eventPublisher);
     }
 
     public Boolean reserveSeats(List<Integer> seatNumbers) {
