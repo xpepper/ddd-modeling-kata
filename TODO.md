@@ -1,5 +1,5 @@
 # TODO
-* use the java 17 switch case instead of using instanceOf 
+* use the java 17 (preview) switch case instead of using instanceOf 
 
 ### Nice to have
 * add a scheduleTime to Screening (we forgot to add it before...)
@@ -7,7 +7,8 @@
 # Questions
 * the aggregate ID (e.g. `Screening`) should be defined client side (and thus be passed in and received as a parameter of a command) or on the "server-side", generated somehow by the aggregate itself?
 * who fires the `ScreeningCreated` event?
-* should we fire a `ReservationDenied` event?
+  * we imagined a `ScreeningCreated` event that is needed in order to define a screening (its seats, its schedule maybe, etc)… This event - I guess - is fired by the aggregate after reacting to the command that create a `Screening` (e.g. `CreateScreeningCommand` ). Is it reasonable?
+* should we fire a `ReservationDenied` event when the seats are not available?
 * it's better to have `new Screening(events)` or `Screening.from(events)` to reconstitute a `Screening` from events?
 * trade-offs between using an interface (`Publisher#publish(event)`) vs passing a function (`(event) -> EventStore::append`)
 
