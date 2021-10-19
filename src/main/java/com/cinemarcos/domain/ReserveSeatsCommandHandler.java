@@ -11,11 +11,8 @@ public class ReserveSeatsCommandHandler {
 
     public Boolean handle(ReserveSeatsCommand command) {
         List<Event> events = eventStore.allEventsById(command.screeningId);
-        Screening screening = Screening.from(events);
-        Boolean seatsReserved = screening.reserveSeats(command.seats);
-        eventStore.append(new ScreeningSeatsReserved(command.screeningId, command.seats));
+        Screening screening = Screening.from(eventStore::append, events);
 
-        return seatsReserved;
+        return screening.reserveSeats(command.seats);
     }
-
 }

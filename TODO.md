@@ -1,5 +1,4 @@
 # TODO
-* `Screening#researveSeats` has to fire a `ScreeningSeatsReserved` (e.g. `eventstore.publish(event)`)
 * Event store has to store the events
 
 * should we fire a `ReservationDenied` event?

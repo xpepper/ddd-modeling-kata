@@ -3,9 +3,8 @@ package com.cinemarcos.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
-import java.util.Random;
+import java.util.function.Consumer;
 
-import static java.lang.System.currentTimeMillis;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE;
@@ -13,15 +12,20 @@ import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE
 public class Screening {
     private Long id;
     private List<Seat> seats;
+    private Consumer<Event> eventPublisher;
 
-    public static Screening from(List<Event> events) {
-        Screening screening = new Screening();
+    private Screening(Consumer<Event> eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
+
+    public static Screening from(Consumer<Event> eventPublisher, List<Event> events) {
+        Screening screening = new Screening(eventPublisher);
         events.forEach(screening::apply);
         return screening;
     }
 
-    static Screening from(Event... events) {
-        return from(asList(events));
+    static Screening from(Consumer<Event> eventPublisher, Event... events) {
+        return from(eventPublisher, asList(events));
     }
 
     public Boolean reserveSeats(List<Integer> seatNumbers) {
@@ -29,10 +33,12 @@ public class Screening {
         if (!seats.containsAll(seatsReserve)) return false;
 
         doReserve(seatsReserve);
+        eventPublisher.accept(new ScreeningSeatsReserved(id, seatNumbers));
         return true;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return ToStringBuilder.reflectionToString(this, NO_CLASS_NAME_STYLE);
     }
 
