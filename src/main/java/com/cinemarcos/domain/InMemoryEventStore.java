@@ -18,7 +18,7 @@ public class InMemoryEventStore implements EvenStore {
             events.add(event);
             store.put(event.id, events);
         } else {
-            ArrayList<Event> events = new ArrayList<>();
+            List<Event> events = new ArrayList<>();
             events.add(event);
             store.put(event.id, events);
         }
