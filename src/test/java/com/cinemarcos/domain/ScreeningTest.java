@@ -12,43 +12,40 @@ public class ScreeningTest {
 
     @Test
     void reserve_seats_when_available() {
-        Screening screening = new Screening(AN_ID, Seat.available(1), Seat.reserved(2));
-        Boolean reserved = screening.reserveSeats(asList(1));
+        Screening screening = Screening.from(
+                new ScreeningCreated(AN_ID, asList(1, 2, 3)),
+                new ScreeningSeatsReserved(AN_ID, asList(2,3))
+        );
 
-        assertThat(reserved).isTrue();
-    }
-
-    @Test
-    void does_not_reserve_seat_when_unavailable() {
-        Screening screening = new Screening(AN_ID, Seat.available(1), Seat.reserved(2));
-        Boolean reserved = screening.reserveSeats(asList(2));
-
-        assertThat(reserved).isFalse();
+        assertThat(screening.reserveSeats(asList(1))).isTrue();
     }
 
     @Test
     void does_not_reserve_seat_when_at_least_one_is_unavailable() {
-        Screening screening = new Screening(AN_ID, Seat.available(1), Seat.available(2), Seat.reserved(3));
-        Boolean reserved = screening.reserveSeats(asList(1, 3));
+        Screening screening = Screening.from(
+                new ScreeningCreated(AN_ID, asList(1, 2, 3)),
+                new ScreeningSeatsReserved(AN_ID, asList(3))
+        );
 
-        assertThat(reserved).isFalse();
+        assertThat(screening.reserveSeats(asList(1, 3))).isFalse();
     }
 
     @Test
     void cannot_reserve_twice_the_same_seats() {
-        Screening screening = new Screening(AN_ID, Seat.available(1), Seat.reserved(2));
-        assertTrue(screening.reserveSeats(asList(1)));
+        Screening screening = Screening.from(
+                new ScreeningCreated(AN_ID, asList(1, 2, 3)),
+                new ScreeningSeatsReserved(AN_ID, asList(2))
+        );
 
-        Boolean reserved = screening.reserveSeats(asList(1));
-
-        assertThat(reserved).isFalse();
+        assertThat(screening.reserveSeats(asList(1))).isTrue();
+        assertThat(screening.reserveSeats(asList(1))).isFalse();
     }
 
     @Test
-    void does_not_reserve_seat_when_unavailable_event_sourced() {
+    void does_not_reserve_seat_when_unavailable() {
         Screening screening = Screening.from(
-                new ScreeningCreated(123L, asList(1, 2, 3)),
-                new ScreeningSeatsReserved(123L, asList(1))
+                new ScreeningCreated(AN_ID, asList(1, 2, 3)),
+                new ScreeningSeatsReserved(AN_ID, asList(1))
         );
 
         assertThat(screening.reserveSeats(asList(1))).isFalse();

@@ -26,24 +26,4 @@ public class Demo {
         reserved = commandHandler.handle(new ReserveSeatsCommand(123L, asList(1)));
         System.out.println("reserved 1 = " + reserved);
     }
-
-    private static class InMemoryScreeningRepository implements ScreeningRepository {
-        public static Screening SCREENING = new Screening(
-                123L,
-                Seat.available(1),
-                Seat.available(3),
-                Seat.available(42),
-                Seat.available(45),
-                Seat.available(89)
-        );
-
-        @Override public Screening byId(Long id) {
-            return SCREENING;
-        }
-
-        @Override public void save(Screening screening) {
-            SCREENING = screening;
-            System.out.println("saved screening = " + screening);
-        }
-    }
 }

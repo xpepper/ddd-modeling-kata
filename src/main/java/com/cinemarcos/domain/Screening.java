@@ -11,17 +11,8 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.builder.ToStringStyle.NO_CLASS_NAME_STYLE;
 
 public class Screening {
-    private Long id;
+    private Long id = new Random(currentTimeMillis()).nextLong();
     private List<Seat> seats;
-
-    public Screening() {
-        this(new Random(currentTimeMillis()).nextLong());
-    }
-
-    public Screening(Long id, Seat... seats) {
-        this.id = id;
-        this.seats = asList(seats);
-    }
 
     public static Screening from(List<Event> events) {
         Screening screening = new Screening();
