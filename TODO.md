@@ -1,8 +1,12 @@
 # TODO
-* use the java 17 (preview) switch case instead of using instanceOf 
+
+### Story #1
+A Customer reserves specific seats at a specific screening (for simplicity, assume there exists only one screening for the time being).
+If available, the seats should be reserved.
 
 ### Nice to have
 * add a scheduleTime to Screening (we forgot to add it before...)
+* use the java 17 (preview) switch case instead of using instanceOf
 
 # Questions
 * the aggregate ID (e.g. `Screening`) should be defined client side (and thus be passed in and received as a parameter of a command) or on the "server-side", generated somehow by the aggregate itself?
